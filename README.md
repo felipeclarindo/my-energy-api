@@ -1,6 +1,6 @@
 # My Energy Api
 
-Sistema de manipulação de dados por uma api desenvolvida com `django e django-ninja`
+Api Rest para realizar manupilações em um banco de dados oracle desenvolvida com `django e django-ninja`
 
 ## Tecnologias Utilizadas
 
@@ -46,12 +46,18 @@ python manage.py runserver
 
 Acesse a API em http://localhost:8000/api.
 
+## Front end
+
+1. Acesse o reposiotorio
+
+```bash
+https://github.com/felipeclarindo/my-energy
+```
+
+2. Siga as intruções no repositorio para rodar o `front-end`
+
 ## Integrantes
 
 - **Felipe** RM: 554547
 - **Victor** RM: 555059
 - **Jennie** RM: 554661
-
-```
-
-```
