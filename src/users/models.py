@@ -17,9 +17,6 @@ class Users(models.Model):
         if not CPF().validate(self.cpf):
             raise ValidationError("Invalid CPF")
 
-        if self.senha and not self.senha.startswith(('pbkdf2_sha256$', 'bcrypt')):
-            self.senha = make_password(self.senha)
-
         super().save(*args, **kwargs)
 
     class Meta:
