@@ -16,7 +16,7 @@ def index(request):
     "version": "1.0",
     "endpoints": [
         {
-        "route": "/api/energy-bils",
+        "route": "/api/energy-bills",
         "methods":[
             "GET",
             "POST",
