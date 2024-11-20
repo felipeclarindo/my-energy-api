@@ -1,9 +1,8 @@
 from django.db import models
-
+from users.models import Users
 # Create your models here.
 class EnergyBills(models.Model):
     id = models.AutoField(primary_key=True)
-    cpf = models.ForeignKey('users.Users', on_delete=models.CASCADE)
     consumption = models.FloatField()
     value = models.FloatField()
     data = models.DateField()

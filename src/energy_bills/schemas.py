@@ -1,13 +1,10 @@
-from decimal import Decimal
 from datetime import date
 from ninja import Schema
 
 # Schemas for managing EnergyBills
-class EnergyBillSchema(Schema):
-    id: int
-    cpf: int
-    consumo: Decimal 
-    valor: Decimal 
+class EnergyBillsSchema(Schema):
+    consumption: float 
+    value: float 
     data: date
 
     def validate(self):
@@ -17,10 +14,9 @@ class EnergyBillSchema(Schema):
             raise ValueError("Value must be greater than 0.")
 
 
-class CreateEnergyBillSchema(Schema):
-    cpf: int
-    consumo: Decimal 
-    valor: Decimal 
+class CreateEnergyBillsSchema(Schema):
+    consumption: float 
+    value: float 
     data: date
 
     def validate(self):
