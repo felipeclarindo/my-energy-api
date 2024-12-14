@@ -8,7 +8,7 @@ class EnergyBillsSchema(Schema):
     data: date
 
     def validate(self):
-        if self.consumo <= 0:
+        if self.consumption <= 0:
             raise ValueError("Consumption must be greater than 0.")
         if self.valor <= 0:
             raise ValueError("Value must be greater than 0.")
@@ -20,7 +20,7 @@ class CreateEnergyBillsSchema(Schema):
     data: date
 
     def validate(self):
-        if self.consumo <= 0:
+        if self.consumption <= 0:
             raise ValueError("Consumption must be greater than 0.")
         if self.valor <= 0:
             raise ValueError("Value must be greater than 0.")

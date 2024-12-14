@@ -9,7 +9,7 @@ class Users(models.Model):
     id = models.AutoField(primary_key=True)
     cpf = models.CharField(max_length=11, unique=True)
     login = models.CharField(max_length=70, unique=True)
-    senha = models.CharField(max_length=150)  
+    password = models.CharField(max_length=150)  
     email = models.EmailField(max_length=125, unique=True)
 
     def save(self, *args, **kwargs):

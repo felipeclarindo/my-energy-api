@@ -2,10 +2,10 @@ from ninja import Schema
 
 class LoginSchema(Schema):
     login: str
-    senha: str
+    password: str
 
 class RegisterSchema(Schema):
     login: str
-    senha: str
+    password: str
     email: str
     cpf: str

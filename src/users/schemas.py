@@ -12,5 +12,5 @@ class UserSchema(Schema):
 class CreateUserSchema(Schema):
     cpf: str
     login: str
-    senha: str
+    password: str
     email: str
