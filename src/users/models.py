@@ -1,6 +1,5 @@
 from django.contrib.auth.hashers import make_password, is_password_usable
 from django.core.exceptions import ValidationError
-from django.utils import timezone
 from validate_docbr import CPF
 from django.db import models
 
