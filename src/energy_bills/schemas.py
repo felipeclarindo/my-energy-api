@@ -14,7 +14,7 @@ class EnergyBillsSchema(Schema):
             raise ValueError("Value must be greater than 0.")
 
 
-class CreateEnergyBillsSchema(Schema):
+class CreateEnergyBillSchema(Schema):
     consumption: float 
     value: float 
     data: date
