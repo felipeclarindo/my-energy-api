@@ -88,16 +88,15 @@ def delete_energy_bill(request: HttpRequest, energy_bill_id: int) -> JsonRespons
     """
     return EnergyBillsController.delete(energy_bill_id)
 
-@energy_bills_router.get("/summary/{energy_bill_id}", response={200: dict})
-def summary(request: HttpRequest, energy_bill_id: int) -> JsonResponse:
+@energy_bills_router.get("/summary/", response={200: dict, 404: dict})
+def summary(request: HttpRequest) -> JsonResponse:
     """
-    Route to get summary of energy bill by ID.
+    Route to get summary of energy bills.
 
     Args:
         request (HttpRequest): Request to get summary of energy bill.
-        energy_bill_id (int): ID of the energy bill to get summary.
 
     Returns:
         JsonResponse: Response with the summary of the energy bill.
     """
-    return EnergyBillsController.summary(energy_bill_id)
+    return EnergyBillsController.summary()
