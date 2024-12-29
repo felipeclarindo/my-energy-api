@@ -1,5 +1,6 @@
+from django.db.models import Sum
 from django.http import JsonResponse
-
+from django.db.models.functions import TruncMonth
 from .models import EnergyBills
 from .schemas import EnergyBillsSchema, CreateEnergyBillSchema
 
@@ -83,8 +84,9 @@ class EnergyBillsController:
         energy_bill = EnergyBills.objects.filter(id=energy_bill_id).first()
         if energy_bill:
             try:
-                for attr, value in data.dict().items():
-                    setattr(energy_bill, attr, value)
+                for attr, value in data.dict(exclude_unset=True).items():
+                    if value is not None and value:
+                        setattr(energy_bill, attr, value)
                 energy_bill.save()
                 return JsonResponse({"message": "Energy Bill updated successfully", "data": data.dict()}, status=200)
             except Exception as e:
@@ -107,19 +109,43 @@ class EnergyBillsController:
             energy_bill.delete()
             return JsonResponse({"message": "Energy Bill deleted successfully"}, status=200)
         return JsonResponse({"message": "Energy bill not found"}, status=404)
-    
-    @classmethod
-    def summary(cls, energy_bill_id: int) -> JsonResponse:
-        """
-        Get summary of energy bill by ID.
 
-        Args:
-            energy_bill_id (int): ID of the energy bill to get summary.
+    @classmethod
+    def summary(cls) -> JsonResponse:
+        """
+        Get summary of energy bills.
 
         Returns:
-            JsonResponse: Response with the summary of the energy bill.
-        """
-        energy_bills = EnergyBills.objects.filter(id=energy_bill_id)
-        total_consumption = sum([bill.consumption for bill in energy_bills])
-        total_value = sum([bill.valor for bill in energy_bills])
-        return JsonResponse({"total_consumption": total_consumption, "total_value": total_value}, status=200)
+            JsonResponse: Response with the total consumption and total value of the energy bills.
+        """ 
+        
+        energy_bills = EnergyBills.objects.all()
+
+        if not energy_bills.exists():
+            return JsonResponse({"message": "No energy bills found."}, status=404)
+
+        total_consumption = energy_bills.aggregate(total_consumption=Sum('consumption'))['total_consumption']
+        total_value = energy_bills.aggregate(total_value=Sum('value'))['total_value']
+
+        monthly_summary = (
+            energy_bills
+            .annotate(month=TruncMonth('data')) 
+            .values('month')
+            .annotate(monthly_consumption=Sum('consumption'), monthly_value=Sum('value'))
+            .order_by('month')
+        )
+
+        monthly_summary_list = [
+            {
+                "month": entry['month'].strftime("%Y-%m"),
+                "consumption": entry['monthly_consumption'],
+                "value": entry['monthly_value']
+            }
+            for entry in monthly_summary
+        ]
+
+        return JsonResponse({
+            "total_consumption": total_consumption,
+            "total_value": total_value,
+            "monthly_summary": monthly_summary_list
+        }, status=200)

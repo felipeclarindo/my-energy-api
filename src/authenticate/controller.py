@@ -6,6 +6,9 @@ from django.contrib.auth.hashers import make_password, check_password
 from .schemas import LoginSchema, RegisterSchema
 
 class AuthenticateController:
+    """
+    Class to authenticate users.
+    """
     @classmethod
     def register(cls, data: RegisterSchema) -> JsonResponse:
         """
@@ -54,7 +57,7 @@ class AuthenticateController:
         """
         try:
             user = Users.objects.get(login=data.login)
-            checked_password = check_password(data.password, user.password)
+            checked_password = user.check_password(data.password)
             if user and checked_password:
                 login(request, user)
                 return JsonResponse({"message": "Login successful"}, status=200)

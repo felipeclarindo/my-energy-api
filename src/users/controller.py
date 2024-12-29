@@ -105,6 +105,7 @@ class UsersController:
         except Exception as e:
             return JsonResponse({"message": f"Error creating user: {str(e)}"}, status=400)
         
+
     @classmethod
     def patch(cls, user_id: int, data: CreateUserSchema) -> JsonResponse:
         """
@@ -119,16 +120,15 @@ class UsersController:
         """
         user = get_object_or_404(Users, id=user_id)
         try:
-            for attr, value in data.dict().items():
-                setattr(user, attr, value)
-            
+            for attr, value in data.dict(exclude_unset=True).items():
+                if value is not None and value:
+                    setattr(user, attr, value)
             user.save()
-            user_data = {"id": user.id, "login": user.login, "email": user.email, "cpf": user.cpf}
-            return JsonResponse(user_data, status=200)
+            return JsonResponse({"message": f"Success to update user from id {id}", "data": data.dict()}, status=200)
 
         except Exception as e:
             return JsonResponse({"message": f"Error updating user: {str(e)}"}, status=400)
-    
+        
     @classmethod
     def delete(cls, user_id: int) -> JsonResponse:
         """
