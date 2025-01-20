@@ -1,57 +1,72 @@
+🌍 [Leia em Português](README.pt-BR.md)
+
 # My Energy Api
 
-Sistema de manipulação de dados por uma api desenvolvida com `django e django-ninja`
+Api rest developed with `django and django-ninja` for the `My Energy` project to perform manupilations in an oracle database.
 
-## Tecnologias Utilizadas
+## Technologies Used
 
-Django - Estrutura principal da API
-Django Ninja - Framework para construção rápida e eficiente de APIs REST
-SQLite - Banco de dados padrão (pode ser alterado conforme necessidade)
+- `Django` - API main structure.
+- `Django Ninja` - Framework for fast and efficient construction of REST APIs.
+- `SQLite` - Standard database (can be changed as needed).
 
-## Funcionalidades da API
+## Functionalities
 
-A API oferece uma série de funcionalidades para manipulação e gerenciamento de dados. Algumas das principais funcionalidades incluem:
+The API offers a number of features for handling and managing data. Some of the main features include:
 
-- Criação de novos registros no banco de dados.
-- Consulta de dados existentes por meio de filtros e parâmetros.
-- Atualização de registros específicos.
-- Exclusão de dados.
+- Creation of new records in the database.
+- Querying existing data through filters and parameters.
+- Update of specific records.
+- Deletion of data.
 
-## Instalação e Configuração
+## Installation & Configuration
 
-1. Clone o Repositório:
+1. Clone the repository:
 
 ```bash
 git clone https://github.com/felipeclarindo/my-energy-api.git
-cd global_solution_api
 ```
 
-2. Instale as Dependências:
+2. Enter directory:
+
+```bash
+cd my-energy-api
+```
+
+3. Install dependencies:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Configure o Banco de Dados e Migrações:
+4. Configure Database and Migrations:
 
 ```bash
 python manage.py migrate
 ```
 
-4. Execute o Servidor:
+5. Run the server:
 
 ```bash
 python manage.py runserver
 ```
 
-Acesse a API em http://localhost:8000/api.
+6. Access the API in http://localhost:8000/api.
 
-## Integrantes
+7. Go to [My Energy Repository](https://github.com/felipeclarindo/my-energy) to run the front end.
 
-- **Felipe** RM: 554547
-- **Victor** RM: 555059
-- **Jennie** RM: 554661
+## Contribution
 
-```
+Contributions are welcome! If you have suggestions for improvements, feel free to open an issue or submit a pull request.
 
-```
+## Author
+
+**Felipe Clarindo**
+
+- [LinkedIn](https://www.linkedin.com/in/felipeclarindo)
+- [Instagram](https://www.instagram.com/lipethecoder)
+- [GitHub](https://github.com/felipeclarindo)
+
+## License
+
+This project is licensed under the [GNU Affero License](https://www.gnu.org/licenses/agpl-3.0.html).
