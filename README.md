@@ -2,7 +2,7 @@
 
 # My Energy Api
 
-Api Rest to perform manupilations in an oracle database developed with `django` and `django-ninja`.
+Api rest developed with `django and django-ninja` for the `My Energy` project to perform manupilations in an oracle database.
 
 ## Technologies Used
 
